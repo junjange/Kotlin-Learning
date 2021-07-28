@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Touring</string>
+    <string name="title_home">홈</string>
+    <string name="title_search">검색</string>
+    <string name="title_shop">Shop</string>
+    <string name="title_tip">Tip</string>
+    <string name="title_user">My캠핑</string>
+</resources>

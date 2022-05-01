@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
-            android:name=".writeBoardActivity"
+            android:name=".WriteBoardActivity"
             android:exported="false" />
 
         <activity

@@ -4,18 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.twentyfour.bulletin_board.databinding.ActivityMainBinding
 import com.twentyfour.bulletin_board.databinding.ActivityWriteBoardBinding
-import com.twentyfour.bulletin_board.network.BoardObject
 
-class writeBoardActivity : AppCompatActivity() {
+class WriteBoardActivity : AppCompatActivity() {
     private val binding by lazy { ActivityWriteBoardBinding.inflate(layoutInflater) }
     private val viewModel by lazy { ViewModelProvider(this,MainViewModel.Factory(application))[MainViewModel::class.java] }
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -26,13 +20,11 @@ class writeBoardActivity : AppCompatActivity() {
 
     }
 
-
-
     fun onClickAdd(view: View) {
         viewModel.insertRetrofit(binding.titleEdit.text.toString(), binding.contentEdit.text.toString())
 
         // 입력을 하고 MainActivity 이동
-        val intent = Intent(this@writeBoardActivity, MainActivity::class.java)
+        val intent = Intent(this@WriteBoardActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

@@ -75,7 +75,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     implementation 'androidx.room:room-runtime:2.4.2'
 
-
+    // floating button
     implementation 'com.google.android.material:material:<version>'
     
 }

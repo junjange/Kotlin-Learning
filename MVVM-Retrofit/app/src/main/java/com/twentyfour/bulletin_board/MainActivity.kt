@@ -4,11 +4,8 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.twentyfour.bulletin_board.adapter.BoardRecyclerAdapter
-import com.twentyfour.bulletin_board.data.ModelBoardComponent
 import com.twentyfour.bulletin_board.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -29,13 +26,14 @@ class MainActivity : AppCompatActivity() {
         setView() // 리사이클러 뷰 연결
         setObserver() // 뷰모델을 관찰합니다.
 
+        // 플로팅 버튼
         binding.fabMain.setOnClickListener {
             // 플로팅 버튼 클릭시 애니메이션 동작 기능
             toggleFab()
 
             // 플로팅 버튼 클릭 이벤트 - 글 쓰기
             binding.fabEdit.setOnClickListener {
-                val intent = Intent(this, writeBoardActivity::class.java)
+                val intent = Intent(this, WriteBoardActivity::class.java)
                 startActivity(intent)
 
 //              Toast.makeText(this, "글 쓰기 버튼 클릭", Toast.LENGTH_SHORT).show()
@@ -48,12 +46,13 @@ class MainActivity : AppCompatActivity() {
         retrofitAdapter =  BoardRecyclerAdapter().apply {
             setHasStableIds(true) // 리사이클러 뷰 업데이트 시 깜빡임 방지
         }
-        binding.rvList.adapter = retrofitAdapter
+        binding.rvList.adapter = retrofitAdapter // 리사이클러 뷰 연결
     }
 
     private fun setObserver() {
-        viewModel.retrofitTodoList.observe(this, {
 
+        // 뷰모델 관찰
+        viewModel.retrofitTodoList.observe(this, {
             viewModel.retrofitTodoList.value?.let { it1 -> retrofitAdapter.setData(it1) }
         })
 

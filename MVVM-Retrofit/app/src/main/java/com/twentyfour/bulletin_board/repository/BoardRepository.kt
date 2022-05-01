@@ -1,8 +1,11 @@
 package com.twentyfour.bulletin_board.repository
 
 import android.app.Application
+import com.google.gson.JsonObject
 import com.twentyfour.bulletin_board.data.ModelBoard
+import com.twentyfour.bulletin_board.data.ModelBoardComponent
 import com.twentyfour.bulletin_board.network.BoardObject
+import retrofit2.Response
 import java.util.ArrayList
 
 
@@ -29,5 +32,10 @@ class BoardRepository(application : Application) {
             if (instance == null) instance = BoardRepository(application)
             return instance
         }
+    }
+
+     // Insert
+    suspend fun retrofitInsertTodo(modelBoardComponent: ModelBoardComponent) : Response<JsonObject> {
+        return BoardObject.getRetrofitService.postBoard(modelBoardComponent.title, modelBoardComponent.contents)
     }
 }

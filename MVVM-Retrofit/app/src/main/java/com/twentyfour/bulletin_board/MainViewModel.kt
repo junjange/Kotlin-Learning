@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.twentyfour.bulletin_board.data.ModelBoard
+import com.twentyfour.bulletin_board.data.ModelBoardComponent
 import com.twentyfour.bulletin_board.repository.BoardRepository
 import kotlinx.coroutines.launch
 
@@ -19,6 +20,12 @@ class MainViewModel(private val repository: BoardRepository) : ViewModel(){
         viewModelScope.launch {
             _retrofitTodoList.value = repository.retrofitSelectAllTodo()
         }
+    }
+
+    // insert
+    fun insertRetrofit(title : String, contents : String) = viewModelScope.launch {
+        val response = repository.retrofitInsertTodo(ModelBoardComponent(title, contents))
+        if (response.isSuccessful) _retrofitTodoList.value = repository.retrofitSelectAllTodo()
     }
 
 

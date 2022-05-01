@@ -1,6 +1,7 @@
 package com.twentyfour.bulletin_board
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
+        // 데이터 바인딩
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         setView() // 리사이클러 뷰 연결
         setObserver() // 뷰모델을 관찰합니다.
@@ -32,17 +35,16 @@ class MainActivity : AppCompatActivity() {
 
             // 플로팅 버튼 클릭 이벤트 - 글 쓰기
             binding.fabEdit.setOnClickListener {
-                Toast.makeText(this, "글 쓰기 버튼 클릭", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, writeBoardActivity::class.java)
+                startActivity(intent)
+
+//              Toast.makeText(this, "글 쓰기 버튼 클릭", Toast.LENGTH_SHORT).show()
             }
         }
 
     }
 
     private fun setView(){
-        // 데이터 바인딩
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
         retrofitAdapter =  BoardRecyclerAdapter().apply {
             setHasStableIds(true) // 리사이클러 뷰 업데이트 시 깜빡임 방지
         }
